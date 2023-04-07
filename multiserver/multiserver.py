@@ -28,8 +28,8 @@ refresh_counter = 6
 bind_host = '::'
 bind_port = 9997
 
-ssl_cert = '/etc/letsencrypt/live/this_site/fullchain.pem'
-ssl_key = '/etc/letsencrypt/live/this_site/privkey.pem'
+ssl_cert = 'localhost.pem'
+ssl_key = 'localhost.pem'
 ssl_key_passwd = None
 
 tuyadevs = {}
@@ -53,8 +53,8 @@ if (not searchlist) and (not tuyadevs):
     try:
         with open('devices.json', 'r') as fp:
             searchlist = json.load( fp )
-except:
-    pass
+    except:
+        pass
 
 if (not searchlist) and (not tuyadevs):
     raise Exception( 'devicelist.json or devices.json must be present' )
@@ -219,7 +219,7 @@ def ssl_peekable_recv( self, want_bytes, flags=0 ):
 
     return ret + self._orig_recv( (want_bytes - len(ret)), flags )
 
-class ClientWebSocket( SimpleWebSocketServer.SimpleWebSocketServer.WebSocket ):
+class ClientWebSocket( SimpleWebSocketServer.WebSocket ):
     def __init__( self, server, sock, address ):
         super( ClientWebSocket, self ).__init__( server, sock, address )
         self.messages = []
