@@ -1,3 +1,0 @@
-[submodule "server/SimpleWebSocketServer"]
-	path = multiserver/SimpleWebSocketServer
-	url = github-lw:dpallot/simple-websocket-server.git
