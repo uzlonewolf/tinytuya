@@ -22,10 +22,11 @@ class ClientHTTP(SimpleHTTPRequestHandler):
 
         print( 'HTTP path:', self.path, 'translated:', self.path_translated )
 
-        if self.path == '/':
-            self.path_translated = self.path = '/testws.html'
+        if self.path_translated == '/':
+            self.path = '/testws.html'
+            self.path_translated = self.path[1:]
             self.wbody = self.send_head()
-        elif self.path == '/favicon.ico':
+        elif self.path_translated == 'favicon.ico':
             self.send_error( HTTPStatus.NOT_FOUND )
         else:
             self.send_error( HTTPStatus.IM_A_TEAPOT )

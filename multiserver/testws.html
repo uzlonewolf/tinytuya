@@ -76,7 +76,7 @@ A:hover {text-decoration: underline overline; color: red;}
 
       gwsLoggingEnabled = true;
       gwsLogCount = 0
-      const ws_url = "wss://" + gwsData.host + ":" + gwsData.port + "/" + gwsData.token;
+      const ws_url = "ws" + (window.location.protocol == 'http:' ? '' : 's') + "://" + gwsData.host + ":" + gwsData.port + "/" + gwsData.token;
       console.log( 'GWS Connect: ' + ws_url );
 
       try {
