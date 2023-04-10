@@ -385,9 +385,7 @@ class dataobj:
         self.dev_byid[did] = tdev
 
     def remove_client( self, sock ):
-        if self.clients[sock].proto == CLIENT_PROTO_WEBSOCKET:
-            del self.clients[sock].socket_handler
-        elif self.clients[sock].proto == CLIENT_PROTO_HTTP:
+        if hasattr( self, 'socket_handler' ):
             del self.clients[sock].socket_handler
         del self.clients[sock]
 
@@ -458,7 +456,7 @@ class clientobj(object):
     def close( self ):
         log.debug( 'Client connection closed.', exc_info=True )
         self.closed = True
-        if self.proto == CLIENT_PROTO_WEBSOCKET:
+        if self.proto == CLIENT_PROTO_WEBSOCKET and hasattr( self, 'socket_handler' ):
             self.socket_handler.close()
             return
 
